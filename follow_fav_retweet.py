@@ -1,6 +1,6 @@
 import tweepy
 import logging
-from bots.configtweepy import create_api
+from bots.configtweepy import set_api
 import json
 import time
 logging.basicConfig(level=logging.INFO)
@@ -56,9 +56,9 @@ class Listener(tweepy.StreamListener):
         logger.error(status)
 
 def main(keywords):
-    api = create_api()
-    tweets_listener = Listener(api)
-    stream = tweepy.Stream(api.auth, tweets_listener)
+    api = set_api()
+    listener = Listener(api)
+    stream = tweepy.Stream(api.auth, listener)
     stream.filter(track=keywords, languages=["tr"])
 
 if __name__ == "__main__":
