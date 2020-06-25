@@ -1,9 +1,9 @@
 import tweepy
 import logging
 
-logger = logging.getLogger()
+log = logging.getLogger()
 
-def create_api():
+def set_api():
     consumer_key = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
     consumer_secret = 'XXXXXXXXXXXXXXXX'
     access_token = 'XXXXXXXXXXXXXXXXXXX-XXXXXX'
@@ -15,8 +15,8 @@ def create_api():
     try:
         api.verify_credentials()
     except Exception as e:
-        logger.error("Error creating API", exc_info=True)
+        log.error("Error creating API", exc_info=True)
         raise e
-    logger.info("API created")
+    log.info("API created")
     return api
 
