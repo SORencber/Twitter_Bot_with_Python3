@@ -6,7 +6,7 @@ import time
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-class FavRetweetListener(tweepy.StreamListener):
+class Listener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
         self.me = api.me()
@@ -57,7 +57,7 @@ class FavRetweetListener(tweepy.StreamListener):
 
 def main(keywords):
     api = create_api()
-    tweets_listener = FavRetweetListener(api)
+    tweets_listener = Listener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["tr"])
 
