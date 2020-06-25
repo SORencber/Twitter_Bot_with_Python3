@@ -1,26 +1,26 @@
 import tweepy
 import logging
-from bots.configtweepy import create_api
+from bots.configtweepy import set_api
 import time
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger()
+log = logging.getLogger()
 
 
-def follow_followers(api):
-    logger.info("Retrieving and following followers")
-    for follower in tweepy.Cursor(api.followers).items():
-        if not follower.following:
-            logger.info(f"Following {follower.name}")
-            follower.follow()
+def follow_users(api):
+    log.info("Retrieving and following followers")
+    for user in tweepy.Cursor(api.followers).items():
+        if not user.following:
+            log.info(f"Following {user.name}")
+            user.follow()
 
 
 def main():
-    api = create_api()
+    api = set_api()
     while True:
-        follow_followers(api)
-        logger.info("Waiting...")
-        time.sleep(60)
+        follow_users(api)
+        log.info("Waiting...")
+        time.sleep(1*60)
 
 
 if __name__ == "__main__":
