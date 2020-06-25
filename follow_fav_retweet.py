@@ -20,28 +20,28 @@ class Listener(tweepy.StreamListener):
         logger.info(f"Processing tweet id {tweet.id}")
         if tweet.in_reply_to_status_id is not None or \
             tweet.user.id == self.me.id:
-            # This tweet is a reply or I'm its author so, ignore it
+            # If this tweet is  reply and it's mine, skip tweet
             return
         if not tweet.favorited:
-            # Mark it as Liked, since we have not done it yet
+            # If it is not Liked, Like it.
             try:
-                logger.info(f"Add favorite tweet id {tweet.id}")
+                logger.info(f"Add favorite {tweet.id}")
 
                 tweet.favorite()
                 time.sleep(1 * 30)
 
             except Exception as e:
-                logger.error("Error on fav", exc_info=True)
+                logger.error("Error on favorite", exc_info=True)
         if not tweet.retweeted:
-            # Retweet, since we have not retweeted it yet
+            # If it is not retweeted. Retweet it.
             try:
-                logger.info(f"Retweeting tweet id {tweet.id}")
+                logger.info(f"Retweeting  {tweet.id}")
 
                 tweet.retweet()
                 time.sleep(1 * 30)
 
             except Exception as e:
-                logger.error("Error on fav and retweet", exc_info=True)
+                logger.error("Error on retweet", exc_info=True)
 
         if not tweet.user.following:
             try:
@@ -63,3 +63,4 @@ def main(keywords):
 
 if __name__ == "__main__":
     main(["FatihTerzioglu AcilTahliye"])
+    #find "FatihTerzioglu AcilTahliye" tags. Checked and processed them.
